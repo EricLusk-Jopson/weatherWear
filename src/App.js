@@ -8,7 +8,8 @@ function App() {
         <p>This will be a good application tomorrow</p>
       </header>
       <body>
-        <p>Okay, maybe the next day</p>
+        <div>Weather Display</div>
+        <div>Activity List</div>
       </body>
     </div>
   );
