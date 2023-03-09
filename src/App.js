@@ -5,6 +5,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 function App() {
   const isLoaded = useRef(false);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [location, setLocation] = useState("");
   const [feelsLike, setFeelsLike] = useState("");
   const geoUrl = "https://ipgeolocation.abstractapi.com/v1/";
@@ -23,6 +25,8 @@ function App() {
 
     const lat = geoResponse.latitude;
     const lon = geoResponse.longitude;
+    setLatitude(lat);
+    setLongitude(lon);
 
     const weatherResponse = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatehrKey}&units=metric`
@@ -41,9 +45,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
-
-      <WeatherWindow location={location} temp={feelsLike} />
+      <WeatherWindow
+        location={location}
+        lat={latitude}
+        lon={longitude}
+        temp={feelsLike}
+      />
       <div>Activity List</div>
     </div>
   );

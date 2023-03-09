@@ -1,9 +1,15 @@
 import React from "react";
+import Card from "@mui/material/Card";
 
-const WeatherWindow = ({ location, temp }) => {
+const WeatherWindow = ({ location, lat, lon, temp }) => {
   return (
-    <div>
-      It feels like {temp} in {location}
+    <div className="weather-window">
+      <div className="location">{location}</div>
+      <div className="latlon">{`${lat}, ${lon}`}</div>
+      <div className="feels-like">
+        <span>Feels like: </span>
+        <span className="temp">{`${Math.round(temp)}°C`}</span>
+      </div>
     </div>
   );
 };
