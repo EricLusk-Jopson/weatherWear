@@ -84,10 +84,36 @@ html {
 
 .card {
   display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 2fr 2fr 2fr 2fr;
   box-sizing: border-box;
   height: 100px;
   width: 30%;
   background-color: gray;
   border-radius: 5px;
+  }
+
+  .card:hover {
+    background-color: aqua;
+  }
+
+  .card div {
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .addNew {
+  background-color: inherit;
+  border-radius: 5px;
+  border: unset;
+  font-size: 4.2rem;
+  margin: 0 ;
+  }   
+
+  .addNew:hover {
+    color: white;
   }
 

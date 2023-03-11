@@ -10,7 +10,15 @@ function App() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [feelsLike, setFeelsLike] = useState("");
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([
+    {
+      title: " Easy Cycling",
+      description: "pedaling about",
+      start: -1,
+      length: 4,
+      active: true,
+    },
+  ]);
 
   //TODO move these to .env file
   const geoUrl = "https://ipgeolocation.abstractapi.com/v1/";
@@ -74,7 +82,7 @@ function App() {
       />
       <div className="card-list">
         {activities.map((activity) => {
-          return <ActivityCard></ActivityCard>;
+          return <ActivityCard activity={activity}></ActivityCard>;
         })}
         <ActivityCard variant="addNew"></ActivityCard>
       </div>
