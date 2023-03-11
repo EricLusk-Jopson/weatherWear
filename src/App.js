@@ -2,13 +2,17 @@ import logo from "./logo.svg";
 import WeatherWindow from "./components/WeatherWindow";
 import "./App.css";
 import { useEffect, useMemo, useRef, useState } from "react";
+import ActivityCard from "./components/ActivityCard";
 
 function App() {
   const isLoaded = useRef(false);
+  const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [location, setLocation] = useState("");
   const [feelsLike, setFeelsLike] = useState("");
+  const [activities, setActivities] = useState([]);
+
+  //TODO move these to .env file
   const geoUrl = "https://ipgeolocation.abstractapi.com/v1/";
   const geoKey = "9428dd483e554b17aa1adf55da519db4";
   const weatehrKey = "a8afdd263bc5df3653460738544a5938";
@@ -36,6 +40,23 @@ function App() {
     setFeelsLike(weatherResponse.main.feels_like);
   };
 
+  /*
+   * backend maintains a reccommendation scheme for layers
+   * these are influenced by
+   * temperature, precipitation, intensity while outdoors
+   */
+
+  const createActivity = (title, desc, icon, startHr, lengthHrs, intensity) => {
+    return {
+      title: title ?? "",
+      description: desc ?? "",
+      icon: icon ?? null,
+      start: startHr ?? -1,
+      length: lengthHrs ?? 0,
+      intensity: intensity ?? "medium",
+    };
+  };
+
   useEffect(() => {
     if (!isLoaded.current) {
       getWeather();
@@ -51,7 +72,12 @@ function App() {
         lon={longitude}
         temp={feelsLike}
       />
-      <div>Activity List</div>
+      <div className="card-list">
+        {activities.map((activity) => {
+          return <ActivityCard></ActivityCard>;
+        })}
+        <ActivityCard variant="addNew"></ActivityCard>
+      </div>
     </div>
   );
 }
