@@ -1,7 +1,7 @@
 import React from "react";
 
-const ActivityCard = () => {
-  return <div>ActivityCard</div>;
+const ActivityCard = ({ variant }) => {
+  return <div className="card">ActivityCard {variant}</div>;
 };
 
 export default ActivityCard;

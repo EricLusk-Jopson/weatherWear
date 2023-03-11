@@ -1,3 +1,93 @@
+html {
+  font-size: 62.5%;
+  background-color: darkslategrey;
+}
+
+:root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .App {
   text-align: center;
+  padding: 5%;
+  box-sizing: border-box;
+  width: 60vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
+
+.weather-window {
+  width: 100%;
+  display: grid;
+  padding: 8px;
+  grid-template-columns: 3fr 1fr 2fr;
+  grid-template-rows: 5rem 2.5rem;
+  background-color:rgb(36, 31, 66);
+  font-size: 1.6rem;
+  border-radius: 10px;
+}
+
+.location {
+  display: inline-flex;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  color: rgb(156, 184, 207);
+  flex-wrap:nowrap;
+  overflow: hidden;
+  margin: unset;
+  font-size: 3.2rem;
+}
+
+.latlon {
+  display: inline-flex;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  color: rgb(156, 184, 207);
+}
+
+.feels-like {
+  display: inline-flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-items: baseline;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  color: rgb(156, 184, 207);
+  white-space: pre;
+}
+
+.feels-like span {
+  display: inline-block;
+  color: rgb(156, 184, 207);
+}
+
+.temp {
+  font-size: 4.8rem;
+}
+
+.card-list {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.card {
+  display: grid;
+  box-sizing: border-box;
+  height: 100px;
+  width: 30%;
+  background-color: gray;
+  border-radius: 5px;
+  }
+
