@@ -74,6 +74,10 @@ function App() {
     setHidden(false);
   };
 
+  const hide = () => {
+    setHidden(true);
+  };
+
   useEffect(() => {
     if (!isLoaded.current) {
       getWeather();
@@ -101,7 +105,7 @@ function App() {
           <ActivityCard variant="addNew" clickFn={unhide}></ActivityCard>
         </div>
       </div>
-      {!hidden && <ActivityModal onSubmit={createActivity} />}
+      {!hidden && <ActivityModal onSubmit={createActivity} onCancel={hide} />}
     </>
   );
 }

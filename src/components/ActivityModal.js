@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 
-const ActivityModal = ({ onSubmit }) => {
+const ActivityModal = ({ onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
@@ -22,8 +22,13 @@ const ActivityModal = ({ onSubmit }) => {
   };
 
   return (
-    <div className="modal-filter">
-      <div className="modal-window">
+    <div className="modal-filter" onClick={onCancel}>
+      <div
+        className="modal-window"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <h1>Add a new activity</h1>
         <form onSubmit={submitForm}>
           <div className="form-group">
@@ -77,6 +82,7 @@ const ActivityModal = ({ onSubmit }) => {
           </div>
           <button>Submit</button>
         </form>
+        <button onClick={onCancel}>Cancel</button>
       </div>
     </div>
   );
