@@ -2,9 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 
-const ActivityCard = ({ variant, activity }) => {
+const ActivityCard = ({ variant, activity, clickFn }) => {
   return (
-    <div className="card" onClick={() => console.log("clicked")}>
+    <div className="card" onClick={clickFn}>
       {variant === "addNew" ? (
         <button
           className="addNew"
