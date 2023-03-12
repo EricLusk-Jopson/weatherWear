@@ -3,6 +3,7 @@ import WeatherWindow from "./components/WeatherWindow";
 import "./App.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ActivityCard from "./components/ActivityCard";
+import ActivityModal from "./components/ActivityModal";
 
 function App() {
   const isLoaded = useRef(false);
@@ -10,7 +11,16 @@ function App() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [feelsLike, setFeelsLike] = useState("");
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([
+    {
+      title: " Easy Cycling",
+      description: "pedaling about",
+      start: -1,
+      length: 4,
+      active: true,
+    },
+  ]);
+  const [hidden, setHidden] = useState(true);
 
   //TODO move these to .env file
   const geoUrl = "https://ipgeolocation.abstractapi.com/v1/";
@@ -46,15 +56,26 @@ function App() {
    * temperature, precipitation, intensity while outdoors
    */
 
-  const createActivity = (title, desc, icon, startHr, lengthHrs, intensity) => {
-    return {
+  const createActivity = ({ title, desc, start, duration, intensity }) => {
+    const temp = [...activities];
+    temp.unshift({
       title: title ?? "",
       description: desc ?? "",
-      icon: icon ?? null,
-      start: startHr ?? -1,
-      length: lengthHrs ?? 0,
+      start: start ?? -1,
+      duration: duration ?? 0,
       intensity: intensity ?? "medium",
-    };
+    });
+    setActivities(temp);
+    setHidden(true);
+  };
+
+  const unhide = () => {
+    console.log("toggle");
+    setHidden(false);
+  };
+
+  const hide = () => {
+    setHidden(true);
   };
 
   useEffect(() => {
@@ -64,21 +85,28 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(activities);
+  }, [activities]);
+
   return (
-    <div className="App">
-      <WeatherWindow
-        location={location}
-        lat={latitude}
-        lon={longitude}
-        temp={feelsLike}
-      />
-      <div className="card-list">
-        {activities.map((activity) => {
-          return <ActivityCard></ActivityCard>;
-        })}
-        <ActivityCard variant="addNew"></ActivityCard>
+    <>
+      <div className="App">
+        <WeatherWindow
+          location={location}
+          lat={latitude}
+          lon={longitude}
+          temp={feelsLike}
+        />
+        <div className="card-list">
+          {activities.map((activity) => {
+            return <ActivityCard activity={activity}></ActivityCard>;
+          })}
+          <ActivityCard variant="addNew" clickFn={unhide}></ActivityCard>
+        </div>
       </div>
-    </div>
+      {!hidden && <ActivityModal onSubmit={createActivity} onCancel={hide} />}
+    </>
   );
 }
 

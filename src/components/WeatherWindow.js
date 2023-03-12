@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "@mui/material/Card";
 
 const WeatherWindow = ({ location, lat, lon, temp }) => {
   return (
